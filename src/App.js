@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Trending from './Trending';
-import Search from './Search';
+import Trending from './Trending'
 
 class App extends Component {
   render() {
     return (
-	    <div className="App">
-	    <Trending/>
-	    </div>
+        <div>
+        <Trending />
+        </div>
     );
   }
 }
