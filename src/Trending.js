@@ -13,7 +13,7 @@ class Trending extends Component {
     handleChange = (event) => {
         this.setState({
             trendingSearch: event.target.value
-        })
+        })   
     }
 
     handleClick = () => {
