@@ -3,17 +3,15 @@ import axios from 'axios'
 
 class Trending extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-        trendingSearch:"",
+            trendingSearch:"",
             data: []
         }
     }
 
     handleChange = (event) => {
-        this.setState({
-            trendingSearch: event.target.value
-        })   
+        this.setState({trendingSearch: event.target.value});   
     }
 
     handleClick = () => {
@@ -36,24 +34,26 @@ class Trending extends Component {
         {
             return (
                 this.state.data.map((element) => {
-                    return (<div class="gif">
-                        <img src={element.images.original.url} alt="animated"></img>
-                        </div>
-                        )
+                    return (
+			    <div class="gif">
+                            <img src={element.images.original.url} alt="animated"></img>
+                            </div>
+                    );
                 })
-            )
-
+            )	    
         }
     }
     render() {
         let display = this.determineDisplay();
         return (
 
-            <div>
+		<div>
                 <input id="search" onChange={this.handleChange}></input>
                 <button onClick={this.handleClick}>Submit</button>
                 {display}
             </div>
         )
     }
-}
+};
+
+export default Trending;

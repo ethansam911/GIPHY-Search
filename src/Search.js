@@ -63,8 +63,8 @@ class Search extends React.Component {
     }
 };
 
-Search.propType = {
-    prompt: PropType.string
+Search.propTypes = {
+    prompt: PropTypes.string
 }
 
 export default Search;
