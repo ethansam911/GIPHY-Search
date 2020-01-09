@@ -1,29 +1,37 @@
+/* eslint-disable */
 import React, { Component } from 'react'
 import axios from 'axios'
 
+
 class Trending extends Component {
-    constructor(props) {
+    constructor(props) { 
         super(props)
         this.state = {
-        trendingSearch:"",
-            data: []
+            data: [],
+            display: false
         }
     }
 
-    handleChange = (event) => {
-        this.setState({
-            trendingSearch: event.target.value
-        })   
-    }
+
 
     handleClick = () => {
+
+        if(this.state.display===false)
+        {
         axios.get("http://api.giphy.com/v1/gifs/trending?api_key=" + "X0JVNouDUsrGBIINWA2b2ixSJgK45sKl")
             .then(response => {
                 this.setState({
-                    data: response.data.data
+                    data: response.data.data,
+                    display: true
                 })
-                console.log(response.data.data)
+                console.log(response.data.data);
+                
             })
+        }
+        else
+        {
+            this.setState({display: true});
+        }
     }
 
     determineDisplay = () => {
@@ -50,10 +58,11 @@ class Trending extends Component {
         return (
 
             <div>
-                <input id="search" onChange={this.handleChange}></input>
-                <button onClick={this.handleClick}>Submit</button>
+                <button onClick={this.handleClick}>Trending</button>
                 {display}
             </div>
         )
     }
 }
+
+export default Trending;

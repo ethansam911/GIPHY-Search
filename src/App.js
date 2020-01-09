@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TrendingSearch from './Trending'
+import Trending from './Trending'
 
 class App extends Component {
   render() {
     return (
-    
-        <trendingSearch />
+        <div>
+        <Trending />
+        </div>
     );
   }
 }
