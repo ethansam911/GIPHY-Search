@@ -1,58 +1,53 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-class GifCard extends Component {
-    constructor(props) {
+ class GifCard extends Component {
+    constructor(props) 
+    {
         super(props)
         this.state = 
         {
-            data: [],
-            display: false
+            data: []
         }
     }
-    handleClick = () => {
 
-        if (this.state.display === false) {
-            axios.get("http://api.giphy.com/v1/gifs/random?api_key=X0JVNouDUsrGBIINWA2b2ixSJgK45sKl")
-                .then(response => {
-                    this.setState({
-                        data: response.data,
-                        display: true
-                    })
-                    console.log(response.data);
-
+    componentDidMount = () => 
+    {
+        axios.get("http://api.giphy.com/v1/gifs/trending?api_key=9Q9MsWs3RkTosk6qfAWA9lvzrrd7e4RL")
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+                    data: response.data
                 })
-        }
-        else {
-            this.setState({ display: true });
-        }
+
+            })
+
     }
 
-
-    determineDisplay = () => {
-        //If no data is returned, then return nothing
+    determineDisplay = () =>
+     {
         if (this.state.data.length === 0) 
         {
             return null;
-        }
-        else {
+        } 
+        else 
+        {
             return (
-                this.state.data.map((element) => {
-                    return (<div class="gif">
-                        <img src={element.images.original.url} alt="animated"></img>
-                    </div>
-                    )
+                this.state.data.data.map((element) => 
+                {
+                    console.log(element)
+                    return (<img src={element.images.original.url} alt="animated"></img>)
                 })
-            )
-
+            );
         }
+
     }
+
 
     render() {
         let display = this.determineDisplay();
         return (
             <div>
-                <button onClick={this.handleClick}>Random</button>
                 {display}
             </div>
         )
