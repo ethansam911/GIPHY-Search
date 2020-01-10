@@ -15,39 +15,48 @@ class Search extends React.Component {
 
     //chnages the prompt state for fetchData()
     handleChange = (event) => {
-	let searchTerm = event.target.value.replace(/\s+/g,"+").toUpperCase();
+	let searchTerm = event.target.value.replace(" ","+").toUpperCase();
 	this.setState({prompt: searchTerm});
     }
 
+    handleSubmit = event => {
+	event.preventDefault();
+	console.log("Submitted");
+	this.fetchData();
+    }
+
     fetchData = () => {
-	axios.get("http://api.giphy.com/v1/gifs/search?q=" + this.state.prompt + '&api_key=X0JVNouDUsrGBIINWA2b2ixSJgK45sKl')
+	axios.get('http://api.giphy.com/v1/gifs/search?q=' + this.state.prompt + '&api_key=' + 'X0JVNouDUsrGBIINWA2b2ixSJgK45sKl')
 	    .then ( response => {
-		this.setState({data: response.data.data[0]});
+		console.log(response.data.data);
+		this.setState({data: response.data.data});
 	    })
+	    .then( () => console.log(this.state.data))
 	    .catch ( error => console.log(error));
     }
 
     displaySearchResults = () => {
-	if (this.state.data.length === 0){
+	const {data} = this.state;
+	if (data.length === 0){
 	    return (<p>No Results</p>);
 	}
 	else {
-	    this.state.data.map( (element) => {
-		return(<div className="gif">
-		       <img src={element.images.original.url} alt="animated"> </img>;
-		       </div>
-		      )
+	    let result = Object.keys(this.state.data).map( (element) => {
+		return(
+		       <img key={element} src={this.state.data[element].images.downsized.url} alt="gif"></img>
+		      );
 	    });
+	    return result;
 	}
     }
 
     render() {
 	return (
 		<div id="SearchForm">
-		<form onSubmit={this.fetchData}>
+		<form  onSubmit={this.handleSubmit}>
 		<h1>Search</h1>
 		<input type="text" placeholder="Search GIFY" onChange={this.handleChange}></input>
-		<button type="submit">Submit</button>
+		<input type="submit" value="Submit"/>
 		</form>
 		<div id="SearchResults">
 		{this.displaySearchResults()}
@@ -58,8 +67,5 @@ class Search extends React.Component {
     }
 };
 
-Search.propTypes = {
-    prompt: PropTypes.string
-}
 
 export default Search;
