@@ -42,9 +42,8 @@ class Trending extends Component {
         {
             return (
                 this.state.data.map((element) => {
-                    return (<div className="gif">
+                    return (
                             <img src={element.images.original.url} alt="animated"></img>
-                            </div>
                            )
                 })
             )
@@ -54,7 +53,8 @@ class Trending extends Component {
         let display = this.determineDisplay();
         return (
 		<div>
-                <button onClick={this.handleClick}>Trending</button>
+		<h1>Trending</h1>
+                <button onClick={this.handleClick}>Trending</button> <br/>
 		{display}
             </div>
         )

@@ -1,3 +1,4 @@
+ 
 import React, { Component } from 'react'
 import axios from 'axios'
 
@@ -16,7 +17,7 @@ class GifCard extends Component {
             axios.get("http://api.giphy.com/v1/gifs/random?api_key=X0JVNouDUsrGBIINWA2b2ixSJgK45sKl")
                 .then(response => {
                     this.setState({
-                        data: response.data,
+                        data: response.data.data,
                         display: true
                     })
                     console.log(response.data);
@@ -36,14 +37,11 @@ class GifCard extends Component {
             return null;
         }
         else {
+	    console.log(this.state.data);
             return (
-                this.state.data.map((element) => {
-                    return (<div class="gif">
-                        <img src={element.images.original.url} alt="animated"></img>
-                    </div>
-                    )
-                })
-            )
+		<div>
+                    <img key="random" src={this.state.data.images.downsized.url} alt="animated"></img></div>
+            );
 
         }
     }
@@ -51,7 +49,8 @@ class GifCard extends Component {
     render() {
         let display = this.determineDisplay();
         return (
-            <div>
+		<div>
+		<h1>Random</h1>
                 <button onClick={this.handleClick}>Random</button>
                 {display}
             </div>
