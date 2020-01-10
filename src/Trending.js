@@ -10,12 +10,10 @@ class Trending extends Component {
             data: [],
             display: false
         }
+	this.handleClick = this.handleClick.bind(this);
     }
 
-
-
     handleClick = () => {
-
         if(this.state.display===false)
         {
             axios.get("http://api.giphy.com/v1/gifs/trending?api_key=" + "X0JVNouDUsrGBIINWA2b2ixSJgK45sKl")
@@ -44,7 +42,7 @@ class Trending extends Component {
         {
             return (
                 this.state.data.map((element) => {
-                    return (<div class="gif">
+                    return (<div className="gif">
                             <img src={element.images.original.url} alt="animated"></img>
                             </div>
                            )
